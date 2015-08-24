@@ -63,6 +63,14 @@ public class Maze {
         }
     }
 
+    public List<List<Cell>> getCells(){
+        return this.maze;
+    }
+
+    public Set<Wall> getWalls(){
+        return this.walls;
+    }
+
     private Cell getCell(int x, int y){
         return this.maze.get(x).get(y);
     }
