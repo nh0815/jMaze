@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * Created by nick on 8/23/15.
+ * @author Nick Hirakawa
  */
 public class MazeViewer extends JFrame {
 
