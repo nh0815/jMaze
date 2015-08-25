@@ -64,7 +64,7 @@ public class Maze {
         }
     }
 
-    public void addWallToList(Wall wall){
+    private void addWallToList(Wall wall){
         if(!this.walls.contains(wall)){
             this.walls.add(wall);
         }
