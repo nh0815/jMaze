@@ -12,6 +12,10 @@ public class MazeViewer extends JFrame {
 
     private JPanel panel;
 
+    public MazeViewer(Maze maze, int cellSize){
+        this(maze, cellSize, cellSize / 4);
+    }
+
     public MazeViewer(Maze maze, int cellSize, int gapSize){
         this.panel = new MazePanel(maze, cellSize, gapSize);
         setContentPane(this.panel);
