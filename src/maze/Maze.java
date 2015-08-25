@@ -158,4 +158,12 @@ public class Maze {
     public int getHeight() {
         return height;
     }
+
+    public Cell getStart() {
+        return start;
+    }
+
+    public Cell getEnd() {
+        return end;
+    }
 }
