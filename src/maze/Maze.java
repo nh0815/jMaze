@@ -10,7 +10,7 @@ public class Maze {
     private int width;
     private int height;
     private List<List<Cell>> maze;
-    private Set<Wall> walls;
+    private List<Wall> walls;
     private Cell start;
     private Cell end;
     private Random random;
@@ -19,47 +19,54 @@ public class Maze {
         this.width = width;
         this.height = height;
         this.maze = new ArrayList<List<Cell>>();
-        this.walls = new HashSet<Wall>();
+        this.walls = new LinkedList<Wall>();
         this.start = null;
         this.end = null;
         this.random = new Random();
+        init();
     }
 
     /**
      * Set up empty maze cells
      */
     private void init(){
-        for(int i = 0; i < this.width; i++){
+        for(int i = 0; i < this.getWidth(); i++){
             List<Cell> row = new ArrayList<Cell>();
-            for(int j = 0; j < this.height; j++){
+            for(int j = 0; j < this.getHeight(); j++){
                 row.add(new Cell(i, j));
             }
             this.maze.add(row);
         }
-        for(int i = 0; i < this.width; i++){
-            for(int j = 0; j < this.height; j++){
+        for(int i = 0; i < this.getWidth(); i++){
+            for(int j = 0; j < this.getHeight(); j++){
                 Cell cell = this.maze.get(i).get(j);
                 if(cell.getX() > 0){
                     Cell below = getCell(i-1, j);
                     cell.addNeighbor(below);
-                    this.walls.add(new Wall(cell, below));
+                    addWallToList(new Wall(cell, below));
                 }
-                if(cell.getX() < this.width - 1){
+                if(cell.getX() < this.getWidth() - 1){
                     Cell above = getCell(i+1, j);
                     cell.addNeighbor(above);
-                    this.walls.add(new Wall(cell, above));
+                    addWallToList(new Wall(cell, above));
                 }
                 if(cell.getY() > 0){
                     Cell left = getCell(i, j-1);
                     cell.addNeighbor(left);
-                    this.walls.add(new Wall(cell, left));
+                    addWallToList(new Wall(cell, left));
                 }
-                if(cell.getY() < this.height - 1){
+                if(cell.getY() < this.getHeight() - 1){
                     Cell right = getCell(i, j+1);
                     cell.addNeighbor(right);
-                    this.walls.add(new Wall(cell, right));
+                    addWallToList(new Wall(cell, right));
                 }
             }
+        }
+    }
+
+    public void addWallToList(Wall wall){
+        if(!this.walls.contains(wall)){
+            this.walls.add(wall);
         }
     }
 
@@ -67,7 +74,7 @@ public class Maze {
         return this.maze;
     }
 
-    public Set<Wall> getWalls(){
+    public List<Wall> getWalls(){
         return this.walls;
     }
 
@@ -76,8 +83,8 @@ public class Maze {
     }
 
     private Cell getRandomCell(){
-        int x = this.random.nextInt(this.width);
-        int y = this.random.nextInt(this.height);
+        int x = this.random.nextInt(this.getWidth());
+        int y = this.random.nextInt(this.getHeight());
         return getCell(x, y);
     }
 
@@ -90,8 +97,8 @@ public class Maze {
     }
 
     private boolean hasUnvisitedCells(){
-        for(int i = 0; i < this.width; i++){
-            for(int j = 0; j < this.height; j++){
+        for(int i = 0; i < this.getWidth(); i++){
+            for(int j = 0; j < this.getHeight(); j++){
                 if(!getCell(i, j).isVisited()){
                     return true;
                 }
@@ -100,13 +107,13 @@ public class Maze {
         return false;
     }
 
-    private void generate(){
+    public void generate(){
         Cell current = getCell(0, 0);
         this.start = current;
         current.setVisited(true);
         List<Cell> unvisited = new LinkedList<Cell>();
-        for(int i = 0; i < this.width; i++){
-            for(int j = 0; j < this.height; j++){
+        for(int i = 0; i < this.getWidth(); i++){
+            for(int j = 0; j < this.getHeight(); j++){
                 Cell cell = getCell(i, j);
                if(!cell.isVisited()){
                    unvisited.add(cell);
@@ -137,11 +144,18 @@ public class Maze {
                 current.setVisited(true);
             }
         }
-        this.end = getCell(this.width-1, this.height-1);
+        this.end = getCell(this.getWidth() -1, this.getHeight() -1);
     }
 
     private Cell getRandomNeighbor(List<Cell> neighbors){
         return neighbors.get(this.random.nextInt(neighbors.size()));
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
 }
