@@ -22,6 +22,7 @@ public class MazePanel extends JPanel {
         this.maze = maze;
         this.cellSize = cellSize;
         this.gapSize = gapSize;
+        this.setBackground(Color.WHITE);
     }
 
     public void paintComponent(Graphics g){
@@ -45,7 +46,13 @@ public class MazePanel extends JPanel {
         int y1 = cell.getY() * (cellSize + gapSize) + gapSize;
         int width = cellSize;
         int height = cellSize;
-        g.setColor(Color.RED);
+        g.setColor(Color.WHITE);
+        if(cell.equals(this.maze.getStart())){
+            g.setColor(Color.GREEN);
+        }
+        if(cell.equals(this.maze.getEnd())){
+            g.setColor(Color.RED);
+        }
         g.fillRect(x1, y1, width, height);
     }
 
