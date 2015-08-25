@@ -10,7 +10,7 @@ import java.util.List;
 
 
 /**
- * Created by nick on 8/23/15.
+ * @author Nick Hirakawa
  */
 public class MazePanel extends JPanel {
 
@@ -50,7 +50,57 @@ public class MazePanel extends JPanel {
     }
 
     private void drawWall(Wall wall, int cellSize, int gapSize, Graphics g){
+        Cell cell1 = wall.getCell1();
+        Cell cell2 = wall.getCell2();
+        if(cell1.getX() == cell2.getX()){
+            if(cell1.getY() > cell2.getY()){
+                drawBottomWall(cell1.getX(), cell1.getY(), cellSize, gapSize, g);
+            } else {
+                drawTopWall(cell1.getX(), cell1.getY(), cellSize, gapSize, g);
+            }
+        } else {
+            if(cell1.getX() < cell2.getX()){
+                drawRightWall(cell1.getX(), cell1.getY(), cellSize, gapSize, g);
+            }else{
+                drawLeftWall(cell1.getX(), cell1.getY(), cellSize, gapSize, g);
+            }
+        }
+    }
 
+    private void drawTopWall(int x, int y, int cellSize, int gapSize, Graphics g){
+        g.setColor(Color.BLACK);
+        int x1 = x * (cellSize + gapSize) + gapSize;
+        int y1 = y * (cellSize + gapSize) + gapSize + cellSize;
+        int width = cellSize;
+        int height = gapSize;
+        g.fillRect(x1, y1, width, height);
+    }
+
+    private void drawBottomWall(int x, int y, int cellSize, int gapSize, Graphics g){
+        g.setColor(Color.BLACK);
+        int x1 = x * (cellSize + gapSize) + gapSize;
+        int y1 = y * (cellSize + gapSize);
+        int width = cellSize;
+        int height = gapSize;
+        g.fillRect(x1, y1, width, height);
+    }
+
+    private void drawLeftWall(int x, int y, int cellSize, int gapSize, Graphics g){
+        g.setColor(Color.BLACK);
+        int x1 = x * (cellSize + gapSize);
+        int y1 = y * (cellSize + gapSize) + gapSize;
+        int width = gapSize;
+        int height = cellSize;
+        g.fillRect(x1, y1, width, height);
+    }
+
+    private void drawRightWall(int x, int y, int cellSize, int gapSize, Graphics g){
+        g.setColor(Color.BLACK);
+        int x1 = x * (cellSize + gapSize) + gapSize + cellSize;
+        int y1 = y * (cellSize + gapSize) + gapSize;
+        int width = gapSize;
+        int height = cellSize;
+        g.fillRect(x1, y1, width, height);
     }
 
     private void drawBorders(int cellSize, int gapSize, Graphics g){
@@ -65,7 +115,6 @@ public class MazePanel extends JPanel {
         height = maze.getHeight() * (gapSize + cellSize) + gapSize;
         g.fillRect(x1, y1, width, height);
 
-//        x1 = maze.getWidth() * (gapSize + cellSize);
         x1 = 0;
         y1 = maze.getHeight() * (gapSize + cellSize);
         width = maze.getWidth() * (cellSize + gapSize) + gapSize;
