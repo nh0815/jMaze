@@ -18,6 +18,7 @@ public class MazeViewer extends JFrame {
 
     public MazeViewer(Maze maze, int cellSize, int gapSize){
         setTitle("jMaze");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.panel = new MazePanel(maze, cellSize, gapSize);
         setContentPane(this.panel);
         int width = (maze.getWidth() + 1) * (cellSize + gapSize) + gapSize;
