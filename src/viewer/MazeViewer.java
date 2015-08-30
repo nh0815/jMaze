@@ -22,7 +22,7 @@ public class MazeViewer extends JFrame {
         this.panel = new MazePanel(maze, cellSize, gapSize);
         setContentPane(this.panel);
         int width = (maze.getWidth() + 1) * (cellSize + gapSize) + gapSize;
-        int height = (maze.getHeight() + 1) * (cellSize + gapSize) + gapSize;
+        int height = (maze.getHeight() + 2) * (cellSize + gapSize) + gapSize;
         this.setPreferredSize(new Dimension(width, height));
         this.pack();
         this.setVisible(true);

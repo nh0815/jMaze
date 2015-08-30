@@ -23,6 +23,9 @@ public class MazePanel extends JPanel {
         this.cellSize = cellSize;
         this.gapSize = gapSize;
         this.setBackground(Color.WHITE);
+        int width = (maze.getWidth() + 1) * (cellSize + gapSize) + gapSize;
+        int height = (maze.getHeight() + 1) * (cellSize + gapSize) + gapSize;
+        this.setPreferredSize(new Dimension(width, height));
     }
 
     public void paintComponent(Graphics g){
@@ -81,7 +84,7 @@ public class MazePanel extends JPanel {
         int width = cellSize;
         int height = gapSize;
         g.fillRect(x1, y1, width, height);
-        drawBorderConnectors(x1-gapSize, y1, gapSize, g);
+        drawBorderConnectors(x1 - gapSize, y1, gapSize, g);
     }
 
     private void drawBottomWall(int x, int y, int cellSize, int gapSize, Graphics g){
@@ -111,7 +114,7 @@ public class MazePanel extends JPanel {
         int width = gapSize;
         int height = cellSize;
         g.fillRect(x1, y1, width, height);
-        drawBorderConnectors(x1, y1+cellSize, gapSize, g);
+        drawBorderConnectors(x1, y1 + cellSize, gapSize, g);
         drawBorderConnectors(x1, y1-gapSize, gapSize, g);
     }
 
