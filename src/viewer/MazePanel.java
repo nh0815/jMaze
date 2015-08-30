@@ -81,6 +81,7 @@ public class MazePanel extends JPanel {
         int width = cellSize;
         int height = gapSize;
         g.fillRect(x1, y1, width, height);
+        drawBorderConnectors(x1-gapSize, y1, gapSize, g);
     }
 
     private void drawBottomWall(int x, int y, int cellSize, int gapSize, Graphics g){
@@ -90,6 +91,7 @@ public class MazePanel extends JPanel {
         int width = cellSize;
         int height = gapSize;
         g.fillRect(x1, y1, width, height);
+        drawBorderConnectors(x1+gapSize, y1, gapSize, g);
     }
 
     private void drawLeftWall(int x, int y, int cellSize, int gapSize, Graphics g){
@@ -99,6 +101,7 @@ public class MazePanel extends JPanel {
         int width = gapSize;
         int height = cellSize;
         g.fillRect(x1, y1, width, height);
+        drawBorderConnectors(x1, y1+gapSize, gapSize, g);
     }
 
     private void drawRightWall(int x, int y, int cellSize, int gapSize, Graphics g){
@@ -108,6 +111,13 @@ public class MazePanel extends JPanel {
         int width = gapSize;
         int height = cellSize;
         g.fillRect(x1, y1, width, height);
+        drawBorderConnectors(x1, y1+cellSize, gapSize, g);
+        drawBorderConnectors(x1, y1-gapSize, gapSize, g);
+    }
+
+    private void drawBorderConnectors(int x1, int y1, int gapSize, Graphics g){
+        g.setColor(Color.BLACK);
+        g.fillRect(x1, y1, gapSize, gapSize);
     }
 
     private void drawBorders(int cellSize, int gapSize, Graphics g){
