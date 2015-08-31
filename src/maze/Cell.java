@@ -2,6 +2,7 @@ package maze;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * @author Nick Hirakawa
@@ -12,13 +13,14 @@ public class Cell {
     private int y;
     private boolean visited;
     private List<Cell> neighbors;
-
+    private Random random;
 
     public Cell(int x, int y){
         this.x = x;
         this.y = y;
         this.setVisited(false);
         this.neighbors = new LinkedList<Cell>();
+        random = new Random();
     }
 
     public int getX() {
@@ -37,6 +39,10 @@ public class Cell {
 
     public List<Cell> getNeighbors(){
         return this.neighbors;
+    }
+
+    public Cell getRandomNeighbor(){
+        return this.neighbors.get(random.nextInt(neighbors.size()));
     }
 
     public boolean isVisited() {
