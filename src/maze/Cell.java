@@ -71,4 +71,29 @@ public class Cell {
     public String toString(){
         return "(" + x + "," + y + ")";
     }
+
+    public boolean hasUnvisitedNeighbors() {
+        for(Cell cell : neighbors){
+            if(!cell.isVisited()){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<Cell> getUnvisitedNeighbors() {
+        List<Cell> unvisited = new LinkedList<>();
+        for(Cell cell : neighbors){
+            if(!cell.isVisited()){
+                unvisited.add(cell);
+            }
+        }
+        return unvisited;
+    }
+
+    public void removeNeighbor(Cell current) {
+        if(neighbors.contains(current)){
+            neighbors.remove(current);
+        }
+    }
 }

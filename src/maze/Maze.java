@@ -145,6 +145,46 @@ public class Maze {
             }
         }
         this.end = getCell(this.getWidth() -1, this.getHeight() -1);
+        for(Wall wall : walls){
+            Cell cell1 = wall.getCell1();
+            Cell cell2 = wall.getCell2();
+            cell1.removeNeighbor(cell2);
+            cell2.removeNeighbor(cell1);
+        }
+    }
+
+    public List<Cell> solve(){
+        for(List<Cell> row : getCells()){
+            for(Cell cell : row){
+                cell.setVisited(false);
+            }
+        }
+        Cell current = start;
+        return rSolve(current);
+    }
+
+    private List<Cell> rSolve(Cell cell){
+        cell.setVisited(true);
+        if(cell.equals(end)){
+            List<Cell> path = new LinkedList<>();
+            path.add(end);
+            return path;
+        }else{
+            if(cell.hasUnvisitedNeighbors()){
+                List<Cell> unvisitedNeighbors = cell.getUnvisitedNeighbors();
+                for(Cell neighbor : unvisitedNeighbors){
+                    LinkedList<Cell> path = (LinkedList) rSolve(neighbor);
+                    neighbor.setVisited(true);
+                    if(path != null){
+                        path.addFirst(cell);
+                        return path;
+                    }
+                }
+                return null;
+            }else{
+                return null;
+            }
+        }
     }
 
     private Cell getRandomNeighbor(List<Cell> neighbors){
