@@ -50,6 +50,9 @@ public class MazePanel extends JPanel {
         int width = cellSize;
         int height = cellSize;
         g.setColor(Color.WHITE);
+        if(cell.isVisited()){
+            g.setColor(Color.YELLOW);
+        }
         if(cell.equals(this.maze.getStart())){
             g.setColor(Color.GREEN);
         }
