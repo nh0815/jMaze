@@ -28,6 +28,11 @@ public class MazePanel extends JPanel {
         this.setPreferredSize(new Dimension(width, height));
     }
 
+    public void setMaze(Maze maze){
+        this.maze = maze;
+        revalidate();
+    }
+
     public void paintComponent(Graphics g){
         super.paintComponent(g);
 
