@@ -14,6 +14,7 @@ public class Maze {
     private Cell start;
     private Cell end;
     private Random random;
+    private List<Cell> solution;
 
     public Maze(int width, int height){
         this.width = width;
@@ -159,18 +160,15 @@ public class Maze {
         }
     }
 
-    public List<Cell> solve(){
-        Cell current = start;
-        List<Cell> solution = rSolve(current);
+    public void solve(){
         for(List<Cell> row : getCells()){
             for(Cell cell : row){
                 cell.setVisited(false);
             }
         }
-        for(Cell cell : solution){
-            cell.setVisited(true);
-        }
-        return solution;
+        Cell current = start;
+        List<Cell> solution = rSolve(current);
+        this.solution = solution;
     }
 
     private List<Cell> rSolve(Cell cell){
@@ -195,6 +193,10 @@ public class Maze {
                 return null;
             }
         }
+    }
+
+    public List<Cell> getSolution(){
+        return solution;
     }
 
     private Cell getRandomNeighbor(List<Cell> neighbors){

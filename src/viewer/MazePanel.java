@@ -37,9 +37,23 @@ public class MazePanel extends JPanel {
 
         drawBorders(this.cellSize, this.gapSize, g);
 
+        List<Cell> solution = maze.getSolution();
         for(List<Cell> row : this.maze.getCells()){
             for(Cell cell : row){
-                drawCell(cell, this.cellSize, this.gapSize, g);
+                Color color = Color.WHITE;
+                if(cell.isVisited()){
+                    color = Color.LIGHT_GRAY;
+                }
+                if(solution != null && solution.contains(cell)) {
+                    color = Color.YELLOW;
+                }
+                if(cell.equals(this.maze.getStart())){
+                    color = Color.GREEN;
+                }
+                if(cell.equals(this.maze.getEnd())){
+                    color = Color.RED;
+                }
+                drawCell(cell, this.cellSize, this.gapSize, g, color);
             }
         }
 
@@ -48,25 +62,17 @@ public class MazePanel extends JPanel {
         }
     }
 
-    private void drawCell(Cell cell, int cellSize, int gapSize, Graphics g){
+    private void drawCell(Cell cell, int cellSize, int gapSize, Graphics g, Color color){
+        g.setColor(color);
         int x1 = cell.getX() * (cellSize + gapSize) + gapSize;
         int y1 = cell.getY() * (cellSize + gapSize) + gapSize;
         int width = cellSize;
         int height = cellSize;
-        g.setColor(Color.WHITE);
-        if(cell.isVisited()){
-            g.setColor(Color.YELLOW);
-        }
-        if(cell.equals(this.maze.getStart())){
-            g.setColor(Color.GREEN);
-        }
-        if(cell.equals(this.maze.getEnd())){
-            g.setColor(Color.RED);
-        }
         g.fillRect(x1, y1, width, height);
     }
 
     private void drawWall(Wall wall, int cellSize, int gapSize, Graphics g){
+        g.setColor(Color.BLACK);
         Cell cell1 = wall.getCell1();
         Cell cell2 = wall.getCell2();
         if(cell1.getX() == cell2.getX()){
