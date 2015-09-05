@@ -151,6 +151,11 @@ public class Maze {
             cell1.removeNeighbor(cell2);
             cell2.removeNeighbor(cell1);
         }
+        for(List<Cell> row : getCells()){
+            for(Cell cell : row){
+                cell.setVisited(true);
+            }
+        }
     }
 
     public List<Cell> solve(){
