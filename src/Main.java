@@ -10,8 +10,6 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args){
-        Maze maze = new Maze(20, 20);
-        maze.generate();
-        MazeViewer viewer = new MazeViewer(maze, 20);
+        new MazeViewer(20, 20);
     }
 }

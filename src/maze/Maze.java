@@ -24,6 +24,7 @@ public class Maze {
         this.end = null;
         this.random = new Random();
         init();
+        generate();
     }
 
     /**
