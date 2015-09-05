@@ -12,7 +12,6 @@ public class Main {
     public static void main(String[] args){
         Maze maze = new Maze(20, 20);
         maze.generate();
-        List<Cell> solution = maze.solve();
         MazeViewer viewer = new MazeViewer(maze, 20);
     }
 }

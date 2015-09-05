@@ -30,7 +30,6 @@ public class MazePanel extends JPanel {
 
     public void setMaze(Maze maze){
         this.maze = maze;
-        revalidate();
     }
 
     public void paintComponent(Graphics g){

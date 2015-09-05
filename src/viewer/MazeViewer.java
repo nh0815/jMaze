@@ -61,6 +61,8 @@ public class MazeViewer extends JFrame {
                 maze = new Maze(20, 20);
                 maze.generate();
                 panel.setMaze(maze);
+                panel.validate();
+                panel.repaint();
             }
         };
     }
@@ -70,7 +72,9 @@ public class MazeViewer extends JFrame {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 maze.solve();
-                panel.revalidate();
+//                panel.revalidate();
+                panel.validate();
+                panel.repaint();
             }
         };
     }
