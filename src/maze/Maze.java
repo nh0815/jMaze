@@ -153,19 +153,23 @@ public class Maze {
         }
         for(List<Cell> row : getCells()){
             for(Cell cell : row){
-                cell.setVisited(true);
+                cell.setVisited(false);
             }
         }
     }
 
     public List<Cell> solve(){
+        Cell current = start;
+        List<Cell> solution = rSolve(current);
         for(List<Cell> row : getCells()){
             for(Cell cell : row){
                 cell.setVisited(false);
             }
         }
-        Cell current = start;
-        return rSolve(current);
+        for(Cell cell : solution){
+            cell.setVisited(true);
+        }
+        return solution;
     }
 
     private List<Cell> rSolve(Cell cell){
