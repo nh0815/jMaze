@@ -14,8 +14,5 @@ public class Main {
         maze.generate();
         MazeViewer viewer = new MazeViewer(maze, 20);
         List<Cell> solution = maze.solve();
-        for(Cell cell : solution){
-            System.out.println(cell);
-        }
     }
 }
