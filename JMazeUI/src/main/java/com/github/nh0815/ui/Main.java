@@ -1,8 +1,6 @@
-import maze.Cell;
-import maze.Maze;
-import viewer.MazeViewer;
+package com.github.nh0815.ui;
 
-import java.util.List;
+import com.github.nh0815.ui.viewer.MazeViewer;
 
 /**
  * Created by nick on 8/23/15.
