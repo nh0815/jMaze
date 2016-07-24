@@ -1,4 +1,4 @@
-package viewer;
+package com.github.nh0815.ui.viewer;
 
 import maze.Cell;
 import maze.Maze;
