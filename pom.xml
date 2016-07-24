@@ -37,6 +37,7 @@
 
     <modules>
         <module>JMazeCore</module>
+        <module>JMazeUI</module>
     </modules>
 
 
